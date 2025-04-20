@@ -1,0 +1,13 @@
+class Car:
+    def __init__(self, make, model, year):
+        self.make = make        # Марка автомобіля
+        self.model = model      # Модель автомобіля
+        self.year = year        # Рік випуску
+
+    def get_info(self):
+        return f"{self.year} {self.make} {self.model}"
+
+
+# Приклад використання:
+car1 = Car("Toyota", "Camry", 2020)
+print(car1.get_info())  # Виведе: 2020 Toyota Camry
