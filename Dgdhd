@@ -1,0 +1,58 @@
+class BankAccount:
+    def __init__(self, owner, account_number, balance=0):
+        self.owner = owner
+        self.account_number = account_number
+        self.balance = balance
+
+    def deposit(self, amount):
+        self.balance += amount
+        print(f"{amount} грн зараховано на рахунок {self.account_number}.")
+
+    def withdraw(self, amount):
+        if self.balance >= amount:
+            self.balance -= amount
+            print(f"{amount} грн знято з рахунку {self.account_number}.")
+        else:
+            print(f"Недостатньо коштів на рахунку {self.account_number}.")
+
+    def show_info(self):
+        print(f"Власник: {self.owner}, Рахунок: {self.account_number}, Баланс: {self.balance} грн")
+
+
+class Bank:
+    def __init__(self):
+        self.accounts = {}
+
+    def create_account(self, owner, account_number):
+        if account_number not in self.accounts:
+            self.accounts[account_number] = BankAccount(owner, account_number)
+            print(f"Рахунок {account_number} створено для {owner}.")
+        else:
+            print(f"Рахунок {account_number} вже існує.")
+
+    def deposit_to_account(self, account_number, amount):
+        account = self.accounts.get(account_number)
+        if account:
+            account.deposit(amount)
+        else:
+            print("Рахунок не знайдено.")
+
+    def withdraw_from_account(self, account_number, amount):
+        account = self.accounts.get(account_number)
+        if account:
+            account.withdraw(amount)
+        else:
+            print("Рахунок не знайдено.")
+
+    def transfer(self, from_acc, to_acc, amount):
+        sender = self.accounts.get(from_acc)
+        receiver = self.accounts.get(to_acc)
+        if sender and receiver:
+            if sender.balance >= amount:
+                sender.withdraw(amount)
+                receiver.deposit(amount)
+                print(f"Переказ {amount} грн з {from_acc} на {to_acc} виконано.")
+            else:
+                print("Недостатньо коштів для переказу.")
+        else:
+            print("Один з рахунків не знайдено.")
