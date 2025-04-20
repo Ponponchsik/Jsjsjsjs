@@ -1,0 +1,33 @@
+class Transport:
+    def __init__(self, speed):
+        self.speed = speed  # км/год
+
+    def move(self):
+        return f"Рухається зі швидкістю {self.speed} км/год"
+
+
+class Car(Transport):
+    def __init__(self, speed, brand):
+        super().__init__(speed)
+        self.brand = brand
+
+    def move(self):
+        return f"Автомобіль {self.brand} рухається зі швидкістю {self.speed} км/год"
+
+
+class Bicycle(Transport):
+    def __init__(self, speed, type_bike):
+        super().__init__(speed)
+        self.type_bike = type_bike
+
+    def move(self):
+        return f"{self.type_bike} велосипед рухається зі швидкістю {self.speed} км/год"
+
+
+class Train(Transport):
+    def __init__(self, speed, wagons):
+        super().__init__(speed)
+        self.wagons = wagons
+
+    def move(self):
+        return f"Потяг з {self.wagons} вагонами їде зі швидкістю {self.speed} км/год"
