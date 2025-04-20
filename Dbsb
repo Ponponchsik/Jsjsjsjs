@@ -1,0 +1,34 @@
+class Animal:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def speak(self):
+        return "Тварина видає звук."
+
+    def info(self):
+        return f"Ім’я: {self.name}, Вік: {self.age} років"
+
+
+class Dog(Animal):
+    def __init__(self, name, age, breed):
+        super().__init__(name, age)
+        self.breed = breed
+
+    def speak(self):
+        return "Гав-гав!"
+
+    def info(self):
+        return f"Собака {self.name}, порода: {self.breed}, вік: {self.age}"
+
+
+class Cat(Animal):
+    def __init__(self, name, age, color):
+        super().__init__(name, age)
+        self.color = color
+
+    def speak(self):
+        return "Мяу!"
+
+    def info(self):
+        return f"Кіт {self.name}, колір: {self.color}, вік: {self.age}"
