@@ -1,0 +1,41 @@
+class Product:
+    def __init__(self, name, price, stock):
+        self.name = name            # Назва товару
+        self.price = price          # Ціна
+        self.stock = stock          # Кількість на складі
+
+    def is_available(self, quantity):
+        return self.stock >= quantity
+
+
+class Cart:
+    def __init__(self):
+        self.items = {}  # Словник: продукт -> кількість
+
+    def add_product(self, product, quantity):
+        if product.is_available(quantity):
+            product.stock -= quantity
+            if product.name in self.items:
+                self.items[product.name]['quantity'] += quantity
+            else:
+                self.items[product.name] = {'product': product, 'quantity': quantity}
+            print(f"Додано {quantity} шт. {product.name} до кошика.")
+        else:
+            print(f"Недостатньо {product.name} на складі!")
+
+    def remove_product(self, product_name):
+        if product_name in self.items:
+            removed = self.items.pop(product_name)
+            removed['product'].stock += removed['quantity']
+            print(f"{product_name} видалено з кошика.")
+        else:
+            print(f"{product_name} не знайдено в кошику.")
+
+    def total_price(self):
+        return sum(item['product'].price * item['quantity'] for item in self.items.values())
+
+    def show_cart(self):
+        print("\n--- Кошик ---")
+        for name, item in self.items.items():
+            print(f"{name}: {item['quantity']} шт. по {item['product'].price} грн")
+        print(f"Загальна вартість: {self.total_price()} грн\n")
